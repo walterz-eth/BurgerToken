@@ -14,7 +14,7 @@ abstract contract ERC20 {
 
 contract BurgerTokenSale {
 
-    uint private tokenPriceInWei = 1 ether; //TODO: implement an oracle to get price from outside the chain
+    uint private tokenPriceInWei = 10; //TODO: implement an oracle to get price from outside the chain
 
     ERC20 private token;
     address public owner;
@@ -24,6 +24,11 @@ contract BurgerTokenSale {
 
         // note that this contract's owner might not be the same owner of BurgerToken contract
         owner  = msg.sender;
+    }
+
+    function setTokenPrice (uint _price) external {
+        require (msg.sender == owner, "Only the owner can set token price.");
+        tokenPriceInWei = _price;
     }
 
     function buyOneBUR () external payable {
