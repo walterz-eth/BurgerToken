@@ -17,13 +17,13 @@ contract BurgerToken is ERC20, AccessControl {
     }
 
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
-        _mint(to, amount);
+        _mint(to, amount * 10**decimals());
     }
 
     function purchaseBurger (uint _amount) external {
-        _burn (_msgSender(), _amount);
+        _burn (_msgSender(), _amount * 10**decimals());
 
-        emit BurgerPurchased(_msgSender(), _msgSender(), _amount);
+        emit BurgerPurchased(_msgSender(), _msgSender(), _amount * 10**decimals());
     }
 
 }
